@@ -1,12 +1,11 @@
-import { Link } from 'react-router-dom';
 import LogoRed from '../assets/NixorSharkOutlineNormal.png';
 
-export default function SignIn() {
+export default function SignUp() {
   return (
     <div className='p-12 flex flex-col gap-10 font-inter'>
         <div className='flex flex-col items-center'>
             <img src={LogoRed} className='h-20 w-20 object-contain'/>
-            <h1 className="font-semibold text-xl">Sign in to your account</h1>
+            <h1 className="font-semibold text-xl">Create an account to continue</h1>
         </div>
         <div className='w-full m-auto'>
             <div className='bg-white p-12 rounded-lg border shadow-sm sm:max-w-[580px] mx-auto'>
@@ -16,13 +15,14 @@ export default function SignIn() {
                         <input type="text" className='border rounded-md p-2' />
                     </div>
                     <div className='flex flex-col gap-2'>
+                        <label htmlFor="">Email address</label>
+                        <input type="email" className='border rounded-md p-2' />
+                    </div>
+                    <div className='flex flex-col gap-2'>
                         <label htmlFor="">Password</label>
                         <input type="password" className='border rounded-md p-2' />
                     </div>
                     <button type="submit" className='bg-red-700 text-white p-2 rounded-lg'>Sign in</button>
-                    <div className='text-light'>
-                        <span>No account? <Link to={'/sign-up'}className='text-blue-600 hover:underline'>Create an account</Link></span>
-                    </div>
                 </form>
             </div>
         </div>
