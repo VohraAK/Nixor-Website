@@ -13,7 +13,7 @@ export default function Header() {
               <h1>Link</h1>
               <h1>Link</h1>
             </div>
-            <div className='flex gap-'>
+            <div className='flex gap-5'>
               <Link to={'/sign-in'}>Sign In</Link>
               <h1>Link</h1>
               <h1>Link</h1>
