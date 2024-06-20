@@ -7,12 +7,12 @@ const userSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     // rest can be modified after-the-fact
-    firstName: { type: String, require: true, default: "" },
-    lastName: { type: String, require: true, default: "" },
-    address: { type: String, default: ""},
+    firstName: { type: String, require: true, default: null },
+    lastName: { type: String, require: true, default: null },
+    address: { type: String, default: null },
     DOB: { type: Date, require: true, default: null },
     // default behaviour -> not admin until changed in db
-    isAdmin: { type: Boolean }
+    isAdmin: { type: Boolean, default: false }
 }, { timestamps: true })
 
 const User = mongoose.model('User', userSchema);

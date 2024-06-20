@@ -22,6 +22,7 @@ export default function SignUp() {
 
         try 
         {   
+            // call signup endpoint
             const response = await fetch('/api/auth/signup', 
             {
                 method: "POST",
@@ -40,7 +41,7 @@ export default function SignUp() {
             }
             setSubmitError(null);
             setSubmitLoading(false);
-            navigate('/sign-in')
+            navigate('/user-details');
         } 
         catch (error) 
         {
@@ -72,8 +73,11 @@ export default function SignUp() {
                         <label htmlFor="">Password</label>
                         <input type="password" id='password' onChange={handleChange} className='border rounded-md p-2' />
                     </div>
-                    <button type="submit" className='bg-red-700 text-white p-2 rounded-lg'>Sign in</button>
+                    <button type="submit" disabled={submitLoading} className='bg-red-700 text-white p-2 rounded-lg disabled:opacity-80'>
+                        {submitLoading ? 'Signing up...' : 'Sign up'}
+                    </button>
                 </form>
+                { submitError !== null && <h1 className='text-red-700 text-sm mt-5'>{submitError}</h1> }
             </div>
         </div>
     </div>

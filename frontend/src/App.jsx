@@ -6,6 +6,7 @@ import ECAs from './pages/ECAs';
 import Academics from './pages/Academics';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
+import UserDetails from './pages/UserDetails';
 
 export default function App() {
   return <BrowserRouter>
@@ -17,6 +18,7 @@ export default function App() {
     <Route path='/academics' element={<Academics />} />
     <Route path='/sign-in' element={<SignIn />} />
     <Route path='/sign-up' element={<SignUp />} />
+    <Route path='/user-details' element={<UserDetails />}/>
     {/* add a detailed create account page */}
   </Routes>
   </BrowserRouter>;
