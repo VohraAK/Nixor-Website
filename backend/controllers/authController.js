@@ -42,12 +42,12 @@ export const signin = async (request, response, next) => {
         // check if user exists
         const existingUser = await User.findOne({ username: username });
 
-        if (!existingUser) { return next(errorHandler(404, 'User not found!')) };
+        if (!existingUser) { return next(errorHandler(404, 'Invalid credentials!')) };
 
         // check for valid password
         const validPassword = bcryptjs.compareSync(password, existingUser.password);
 
-        if(!validPassword) { return next(errorHandler(401, 'Invalid credentials')) };
+        if(!validPassword) { return next(errorHandler(401, 'Invalid credentials!')) };
 
         // create user session
         const accessToken = jwt.sign({ id: existingUser._id }, process.env.JWT_SECRET_KEY);

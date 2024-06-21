@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import LogoRed from '../assets/NixorSharkOutlineNormal.png';
 
 export default function SignUp() {
@@ -77,6 +77,9 @@ export default function SignUp() {
                         {submitLoading ? 'Signing up...' : 'Sign up'}
                     </button>
                 </form>
+                <div className='text-light mt-6'>
+                        <span>Already have an account? <Link to={'/sign-in'} className='text-blue-600 hover:underline'>Sign in</Link></span>
+                </div>
                 { submitError !== null && <h1 className='text-red-700 text-sm mt-5'>{submitError}</h1> }
             </div>
         </div>

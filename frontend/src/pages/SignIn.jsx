@@ -1,13 +1,15 @@
 import { Link, useNavigate } from 'react-router-dom';
 import LogoRed from '../assets/NixorSharkOutlineNormal.png';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { signInFaliure, signInStart, signInSuccess } from '../redux/user/userSlice';
 
 export default function SignIn() {
 
 	const [formData, setFormData] = useState({});
-	const [submitLoading, setSubmitLoading] = useState(false);
-	const [submitError, setSubmitError] = useState(null);
 
+	const { error, loading } = useSelector((state) => state.user);
+	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
 	console.log(formData);
@@ -18,11 +20,10 @@ export default function SignIn() {
 
 	const handleFormSubmit = async (e) => {
 		e.preventDefault();
-		setSubmitLoading(true);
-		setSubmitError(false);
 
 		try 
 		{
+			dispatch(signInStart());
 			// call signin endpoint
 			const response = await fetch('/api/auth/signin', 
 			{
@@ -36,21 +37,14 @@ export default function SignIn() {
 			// check success
 			if (data.success === false)
 			{
-				setSubmitError(data.message);
-				setSubmitLoading(false);
+				dispatch(signInFaliure(data.message));
 				return;
 			}
-
-			setSubmitError(null);
-			setSubmitLoading(false);
+			dispatch(signInSuccess(data));
 			navigate('/');
 
 		} 
-		catch (error) 
-		{
-			setSubmitError(error.message);
-			setSubmitLoading(false);
-		}
+		catch (error) { dispatch(signInFaliure(error.message)) }
 	};
 
 
@@ -72,14 +66,14 @@ export default function SignIn() {
                         <label htmlFor="">Password</label>
                         <input type="password" id='password' onChange={handleChange} className='border rounded-md p-2' />
                     </div>
-                    <button type="submit" disabled={submitLoading} className='bg-red-700 text-white p-2 rounded-lg disabled:opacity-80'>
-											{submitLoading ? 'Signing in...' : "Sign in"}
-										</button>
+                    <button type="submit" disabled={loading} className='bg-red-700 text-white p-2 rounded-lg disabled:opacity-80'>
+						{loading ? 'Signing in...' : "Sign in"}
+					</button>
                     <div className='text-light'>
                         <span>No account? <Link to={'/sign-up'} className='text-blue-600 hover:underline'>Create an account</Link></span>
                     </div>
                 </form>
-								{submitError ? <h1 className='text-red-700 text-sm mt-5'>{submitError}</h1> : ''}
+				{error ? <h1 className='text-red-700 text-sm mt-5'>{error}</h1> : ''}
             </div>
         </div>
     </div>
