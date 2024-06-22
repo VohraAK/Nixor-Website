@@ -12,8 +12,6 @@ export default function SignIn() {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-	console.log(formData);
-
 	const handleChange = (e) => {
 		setFormData({ ...formData, [e.target.id]: e.target.value });
 	};

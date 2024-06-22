@@ -1,13 +1,18 @@
 import { useDispatch, useSelector } from 'react-redux';
 import LogoRed from '../assets/NixorSharkOutlineNormal.png';
-import { useNavigate } from 'react-router-dom';
-import { signOutStart, signOutSuccess, signOutFaliure } from '../redux/user/userSlice';
+import { signOutStart, signOutSuccess, signOutFaliure, updateUserStart, updateUserSuccess, updateUserFaliure } from '../redux/user/userSlice.js';
+import { useState } from 'react';
 
-export default function UserDetails() {
+export default function Profile() {
 
-	const { currentUser } = useSelector((state) => state.user);
+	const { currentUser, error, loading } = useSelector((state) => state.user);
+	const [formData, setFormData] = useState({});
+	const [userUpdateSuccess, setUserUpdateSuccess] = useState(false);
 	const dispatch = useDispatch();
-	const navigate = useNavigate();
+
+	const handleChange = (e) => {
+		setFormData({ ...formData, [e.target.id]: e.target.value })
+	};
 
 	const handleSignOut = async () => {
 		
@@ -29,6 +34,42 @@ export default function UserDetails() {
 		catch (error) { dispatch(signOutFaliure(error.message)) }
 	};
 
+	const handleFormSubmit = async (e) => {
+
+		e.preventDefault();
+		
+		try 
+		{
+			setUserUpdateSuccess(false);
+			dispatch(updateUserStart());
+
+			const response = await fetch(`/api/user/update/${currentUser._id}`, 
+			{
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(formData),
+			});
+
+			const data = await response.json();
+
+			if (data.success === false)
+			{
+				setUserUpdateSuccess(false);
+				dispatch(updateUserFaliure(data.message))
+				return;
+			}
+
+			dispatch(updateUserSuccess(data));
+			setUserUpdateSuccess(true);
+
+		} 
+		catch (error) 
+		{
+			setUserUpdateSuccess(false);
+			dispatch(updateUserFaliure(error.message));
+		}
+	};
+
   return (
     <div className='p-12 flex flex-col gap-10 font-inter'>
         <div className='flex flex-col items-center'>
@@ -36,28 +77,43 @@ export default function UserDetails() {
             <h1 className="font-semibold text-xl">Hello {currentUser.firstName || currentUser.username}</h1>
         </div>
         <div className='w-full m-auto'>
-            <div className='bg-white p-12 rounded-lg border shadow-sm sm:max-w-[580px] mx-auto'>
-                <form className='flex flex-col gap-8'>
+            <div className='bg-white p-12 rounded-lg border shadow-sm sm:max-w-[660px] mx-auto'>
+                <form onSubmit={handleFormSubmit} className='flex flex-col gap-8'>
                     <p className='text-center'>ADD IMAGE HERE</p>
                     <div className='flex flex-col gap-2'>
+                        <label htmlFor="">Username</label>
+                        <input type="text" id='username' className='border rounded-md p-2' onChange={handleChange} defaultValue={currentUser.username} />
+                    </div>
+                    <div className='flex flex-col gap-2'>
+                        <label htmlFor="">Email</label>
+                        <input type="text" id='email' className='border rounded-md p-2' onChange={handleChange} defaultValue={currentUser.email}/>
+                    </div>
+                    <div className='flex flex-col gap-2'>
+                        <label htmlFor="">Change your password</label>
+                        <input type="password" id='password' className='border rounded-md p-2' onChange={handleChange}/>
+                    </div>
+                    <div className='flex flex-col gap-2'>
                         <label htmlFor="">First Name</label>
-                        <input type="text" id='firstName' className='border rounded-md p-2' />
+                        <input type="text" id='firstName' className='border rounded-md p-2' onChange={handleChange} defaultValue={currentUser.firstName}/>
                     </div>
                     <div className='flex flex-col gap-2'>
                         <label htmlFor="">Last Name</label>
-                        <input type="text" id='lastName' className='border rounded-md p-2' />
+                        <input type="text" id='lastName' className='border rounded-md p-2' onChange={handleChange} defaultValue={currentUser.lastName}/>
                     </div>
                     <div className='flex flex-col gap-2'>
                         <label htmlFor="">Date of Birth</label>
-                        <input type="date" id='DOB' className='border rounded-md p-2' />
+                        <input type="date" id='DOB' className='border rounded-md p-2' onChange={handleChange} defaultValue={currentUser.DOB}/>
                     </div>
                     <div className='flex flex-col gap-2'>
                         <label htmlFor="">Permanent Address</label>
-                        <input type="text" id='address' className='border rounded-md p-2' />
+                        <input type="text" id='address' className='border rounded-md p-2' onChange={handleChange} defaultValue={currentUser.address}/>
                     </div>
-                    <button type="submit" className='bg-red-700 text-white p-2 rounded-lg'>Update Profile</button>
+                    <button type="submit" disabled={loading} className='bg-red-700 text-white p-2 rounded-lg disabled:opacity-80'>
+						{loading ? 'Updating...' : (userUpdateSuccess ? 'Profile updated successfully ✓' : 'Update Profile')}
+					</button>
                 </form>
-                <button onClick={handleSignOut} className='text-red-700 mt-10 hover:underline'>Sign out</button>
+                  <button onClick={handleSignOut} className='text-red-700 mt-10 hover:underline'>Sign out</button>
+				{error ? error : ''}
             </div>
         </div>
     </div>
