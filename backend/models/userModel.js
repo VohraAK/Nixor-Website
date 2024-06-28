@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema({
     address: { type: String, default: null },
     DOB: { type: Date, require: true, default: null },
     // default behaviour -> not admin until changed in db
-    isAdmin: { type: Boolean, default: false }
+    userType: { type: String, default: 'user' } // 'user', 'applicant', 'student', 'admin'
 }, { timestamps: true })
 
 const User = mongoose.model('User', userSchema);
