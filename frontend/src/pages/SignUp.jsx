@@ -41,7 +41,7 @@ export default function SignUp() {
             }
             setSubmitError(null);
             setSubmitLoading(false);
-            navigate('/user-details');
+            navigate('/sign-in');
         } 
         catch (error) 
         {

@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import LogoRed from '../assets/NixorSharkOutlineNormal.png';
 import { signOutStart, signOutSuccess, signOutFaliure, updateUserStart, updateUserSuccess, updateUserFaliure } from '../redux/user/userSlice.js';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function Profile() {
 
@@ -9,6 +10,7 @@ export default function Profile() {
 	const [formData, setFormData] = useState({});
 	const [userUpdateSuccess, setUserUpdateSuccess] = useState(false);
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	const handleChange = (e) => {
 		setFormData({ ...formData, [e.target.id]: e.target.value })
