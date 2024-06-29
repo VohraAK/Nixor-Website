@@ -15,9 +15,6 @@ export const updateUser = async (request, response, next) => {
         const updatedUser = await User.findByIdAndUpdate(request.params.id, {
             $set : {
                 username: request.body.username,
-                firstName: request.body.firstName,
-                lastName: request.body.lastName,
-                address: request.body.address,
                 DOB: request.body.DOB,
                 email: request.body.email,
             }
@@ -32,3 +29,4 @@ export const updateUser = async (request, response, next) => {
         next(error);
     }
 };
+

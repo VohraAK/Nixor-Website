@@ -95,20 +95,8 @@ export default function Profile() {
                         <input type="password" id='password' className='border rounded-md p-2' onChange={handleChange}/>
                     </div>
                     <div className='flex flex-col gap-2'>
-                        <label htmlFor="">First Name</label>
-                        <input type="text" id='firstName' className='border rounded-md p-2' onChange={handleChange} defaultValue={currentUser.firstName}/>
-                    </div>
-                    <div className='flex flex-col gap-2'>
-                        <label htmlFor="">Last Name</label>
-                        <input type="text" id='lastName' className='border rounded-md p-2' onChange={handleChange} defaultValue={currentUser.lastName}/>
-                    </div>
-                    <div className='flex flex-col gap-2'>
                         <label htmlFor="">Date of Birth</label>
                         <input type="date" id='DOB' className='border rounded-md p-2' onChange={handleChange} defaultValue={currentUser.DOB}/>
-                    </div>
-                    <div className='flex flex-col gap-2'>
-                        <label htmlFor="">Permanent Address</label>
-                        <input type="text" id='address' className='border rounded-md p-2' onChange={handleChange} defaultValue={currentUser.address}/>
                     </div>
                     <button type="submit" disabled={loading} className='bg-red-700 text-white p-2 rounded-lg disabled:opacity-80'>
 						{loading ? 'Updating...' : (userUpdateSuccess ? 'Profile updated successfully ✓' : 'Update Profile')}

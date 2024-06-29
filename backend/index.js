@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import authRouter from './routes/authRoute.js';
 import userRouter from './routes/userRoute.js';
 import cookieParser from 'cookie-parser';
+import applicantRouter from './routes/applicantRoute.js';
 dotenv.config();
 
 const DEV_PORT = process.env.DEV_PORT;
@@ -24,6 +25,7 @@ connectDB();
 // app routers
 app.use('/api/auth', authRouter);
 app.use('/api/user', userRouter);
+app.use('/api/applicant', applicantRouter);
 
 // error-handling middleware
 app.use((error, request, response, next) => {
