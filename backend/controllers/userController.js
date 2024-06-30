@@ -29,4 +29,3 @@ export const updateUser = async (request, response, next) => {
         next(error);
     }
 };
-

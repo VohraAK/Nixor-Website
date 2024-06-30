@@ -55,7 +55,7 @@ export const signin = async (request, response, next) => {
         const { password: _, ...user } = existingUser._doc;
 
         // create an access cookie
-        response.cookie('access_token', accessToken, { httpOnly: true }).status(200).json(user);
+        response.cookie('access_token', accessToken, { httpOnly: true, expires: new Date(Date.now() + 1 * 60 * 60 * 1000)}).status(200).json(user);
     } 
     catch (error) { next(error) }
 };
