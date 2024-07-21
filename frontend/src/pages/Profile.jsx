@@ -1,16 +1,40 @@
 import { useDispatch, useSelector } from 'react-redux';
 import LogoRed from '../assets/NixorSharkOutlineNormal.png';
 import { signOutStart, signOutSuccess, signOutFaliure, updateUserStart, updateUserSuccess, updateUserFaliure } from '../redux/user/userSlice.js';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import ApplicationStatus from '../components/ApplicationStatus.jsx';
 
 export default function Profile() {
 
 	const { currentUser, error, loading } = useSelector((state) => state.user);
 	const [formData, setFormData] = useState({});
 	const [userUpdateSuccess, setUserUpdateSuccess] = useState(false);
+	const [applicationStatus, setApplicationStatus] = useState(null);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+
+	useEffect(() => {
+		const fetchApplicationStatus = async () => {
+			try 
+			{
+				const response = await fetch(`/api/applicant/checkstatus/${currentUser._id}`);
+				const data = await response.json();
+				console.log(data);
+				if (data.success === false)
+				{
+					setApplicationStatus(null);
+					return;
+				}
+				setApplicationStatus(data);
+			}
+			catch (error) 
+			{
+				setApplicationStatus(null);
+			}
+		}
+		fetchApplicationStatus();
+	}, [currentUser._id]);
 
 	const handleChange = (e) => {
 		setFormData({ ...formData, [e.target.id]: e.target.value })
@@ -80,8 +104,9 @@ export default function Profile() {
         </div>
         <div className='w-full m-auto'>
             <div className='bg-white p-12 rounded-lg border shadow-sm sm:max-w-[660px] mx-auto'>
+			{currentUser && currentUser.userType === 'applicant' && (<ApplicationStatus applicationStatus={applicationStatus}/>)}
                 <form onSubmit={handleFormSubmit} className='flex flex-col gap-8'>
-                    <p className='text-center'>ADD IMAGE HERE</p>
+                    <p className='text-center my-5'>ADD IMAGE HERE</p>
                     <div className='flex flex-col gap-2'>
                         <label htmlFor="">Username</label>
                         <input type="text" id='username' className='border rounded-md p-2' onChange={handleChange} defaultValue={currentUser.username} />

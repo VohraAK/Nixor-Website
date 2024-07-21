@@ -57,5 +57,23 @@ export const createApplication = async (request, response, next) => {
 
   const { password, ...rest } = user._doc;
 
-  response.status(200).json({message: "Application created successfully!", user: rest});
+  response
+    .status(200)
+    .json({ message: "Application created successfully!", user: rest });
+};
+
+export const getApplicationStatus = async (request, response, next) => {
+  if (request.user.id != request.params.id)
+    return next(
+      errorHandler(
+        401,
+        "You can only create an application from your own account!"
+      )
+    );
+  const existingApplicant = await Applicant.findOne({
+    user: request.params.id,
+  });
+  if (!existingApplicant)
+    return next(errorHandler(404, "No application found!"));
+  response.status(200).json(existingApplicant.applicationStatus);
 };
