@@ -18,8 +18,6 @@ export const createApplication = async (request, response, next) => {
   if (existingApplicant)
     return next(errorHandler(401, "You can only create an application once!"));
 
-  console.log(request.body);
-
   const {
     fullName,
     citizenID,

@@ -9,6 +9,8 @@ import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import Profile from './pages/Profile';
 import Apply from './pages/Apply';
+import StudentRoute from './components/StudentRouter';
+import StudentCenter from './pages/StudentCenter';
 
 export default function App() {
   return <BrowserRouter>
@@ -23,6 +25,9 @@ export default function App() {
     <Route element={<UserRoute />}>
       <Route path='/profile' element={<Profile />}/>
       <Route path='/apply-online' element={<Apply />}/>
+    </Route>
+    <Route element={<StudentRoute />}/>
+      <Route path='/student-center' element={<StudentCenter />}>
     </Route>
     {/* add a detailed create account page */}
   </Routes>

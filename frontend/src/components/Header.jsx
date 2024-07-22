@@ -9,8 +9,8 @@ export default function Header() {
   return (
     <header className="w-full font-inter">
         <div className="flex items-center bg-red-800 justify-between p-3.5 md:p-3 shadow-md text-slate-100 text-xs sm:text-lg">
-            <Link to={'/'}>
-            <div className="w-20">
+          <Link to={'/'}>
+            <div className="w-24 flex items-center">
                 <img src={LogoWhite} className='object-contain select-none'/>
             </div>
             </Link>
@@ -23,6 +23,9 @@ export default function Header() {
             <ul className="flex gap-5">
               <li className="hover:cursor-pointer hover:underline text-center">
                 {currentUser && currentUser.userType === 'user' && (<Link to={'/apply-online'}>Apply Now</Link>)}
+              </li>
+              <li className="hover:cursor-pointer hover:underline text-center">
+                {currentUser && currentUser.userType === 'student' && (<Link to={'/student-center'}>Student Center</Link>)}
               </li>
               <li className="hover:cursor-pointer hover:underline text-center">
                 {/* add profile avatar when available */}
