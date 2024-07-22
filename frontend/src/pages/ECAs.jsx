@@ -1,5 +1,3 @@
 export default function ECAs() {
-  return (
-    <div>ECAs</div>
-  )
+  return <div>ECAs</div>;
 }

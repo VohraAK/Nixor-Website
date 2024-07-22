@@ -1,4 +1,3 @@
-
 // eslint-disable-next-line react/prop-types
 export default function ApplicationStatus({ applicationStatus }) {
   return (
@@ -19,12 +18,12 @@ export default function ApplicationStatus({ applicationStatus }) {
           )}
         </div>
       </div>
-        {applicationStatus === 'Accepted' ? 
+      {applicationStatus === "Accepted" ? (
         <button className="text-white bg-red-800 w-full font-semibold text-lg hover:opacity-80 shadow-md rounded-lg p-2 mx-auto">
           Enroll in Nixor College
         </button>
-         : null}
-         {/* Add student-conversion functionality on-click */}
+      ) : null}
+      {/* Add student-conversion functionality on-click */}
     </div>
   );
 }

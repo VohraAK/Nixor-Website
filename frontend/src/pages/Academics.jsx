@@ -1,5 +1,3 @@
 export default function Academics() {
-  return (
-    <div>Academics</div>
-  )
+  return <div>Academics</div>;
 }

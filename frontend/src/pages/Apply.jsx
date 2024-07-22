@@ -63,7 +63,9 @@ export default function Apply() {
     }
 
     if (e.target.id === "educationSystem") {
-      if (e.target.value === '-') { e.target.value = "" }
+      if (e.target.value === "-") {
+        e.target.value = "";
+      }
       setFormData({ ...formData, [e.target.id]: e.target.value });
     }
   };

@@ -95,9 +95,7 @@ export default function Profile() {
     <div className="p-12 flex flex-col gap-10 font-inter">
       <div className="flex flex-col items-center">
         <img src={LogoRed} className="h-20 w-20 object-contain" />
-        <h1 className="font-semibold text-xl">
-          Hello {currentUser.username}
-        </h1>
+        <h1 className="font-semibold text-xl">Hello {currentUser.username}</h1>
       </div>
       <div className="w-full m-auto">
         <div className="bg-white p-12 rounded-lg border shadow-sm sm:max-w-[660px] mx-auto">
