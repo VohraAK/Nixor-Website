@@ -25,9 +25,11 @@ export default function App() {
     <Route element={<UserRoute />}>
       <Route path='/profile' element={<Profile />}/>
       <Route path='/apply-online' element={<Apply />}/>
-    </Route>
-    <Route element={<StudentRoute />}/>
-      <Route path='/student-center' element={<StudentCenter />}>
+
+      <Route element={<StudentRoute />}>
+        <Route path='/student-center' element={<StudentCenter />}/>
+      </Route>
+      
     </Route>
     {/* add a detailed create account page */}
   </Routes>

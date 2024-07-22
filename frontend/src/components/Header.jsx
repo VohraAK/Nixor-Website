@@ -29,7 +29,7 @@ export default function Header() {
               </li>
               <li className="hover:cursor-pointer hover:underline text-center">
                 {/* add profile avatar when available */}
-                {currentUser ? (<Link to={'/profile'}>View Profile</Link>) : (<Link to={'/sign-in'}>Sign in</Link>)}
+                {currentUser && (currentUser.userType === 'user' || currentUser.userType === 'student' || currentUser.userType === 'admin') ? (<Link to={'/profile'}>View Profile</Link>) : (<Link to={'/sign-in'}>Sign In</Link>)}
               </li>
             </ul>
         </div>
