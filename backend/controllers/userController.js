@@ -14,6 +14,7 @@ export const updateUser = async (request, response, next) => {
 
         const updatedUser = await User.findByIdAndUpdate(request.params.id, {
             $set : {
+                fullName: request.body.fullName,
                 username: request.body.username,
                 DOB: request.body.DOB,
                 email: request.body.email,

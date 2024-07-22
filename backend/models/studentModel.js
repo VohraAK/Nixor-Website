@@ -10,6 +10,7 @@ const subjectGradeSchema = new mongoose.Schema({
 
 // new students linked from user doc
 const studentSchema = new mongoose.Schema({
+    fullName: {type: String, required: true, default: null},
     user: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true},
     subjectGrades: {type: subjectGradeSchema, required: true}, // each subject has a grade object, with midterm and final marks
 });

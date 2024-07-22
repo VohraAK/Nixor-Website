@@ -130,7 +130,6 @@ export default function Apply() {
       navigate("/profile");
     } catch (error) {
       dispatch(applicationFaliure(error.message));
-      console.log(error);
       setFormSubmitLoading(false);
       setFormSubmitError(true);
 
@@ -198,6 +197,7 @@ export default function Apply() {
                     id="fullName"
                     onChange={handleFormChange}
                     type="text"
+                    placeholder="John Doe"
                     className="rounded-md p-2 border"
                   />
                   {errors.fullName && (
@@ -405,7 +405,7 @@ export default function Apply() {
                 {formSubmitLoading ? "Submitting..." : "Submit Application"}
               </button>
               {formSubmitError && (
-                <p className="text-red-700 pl-2">{formSubmitError}</p>
+                <p className="text-red-700 pl-2">Error in submitting form</p>
               )}
             </div>
           </div>

@@ -62,6 +62,10 @@ export default function SignUp() {
             <div className='bg-white p-12 rounded-lg border shadow-sm sm:max-w-[580px] mx-auto'>
                 <form onSubmit={handleFormSubmit} className='flex flex-col gap-8'>
                     <div className='flex flex-col gap-2'>
+                        <label htmlFor="">Full Name</label>
+                        <input type="text" id='fullName' onChange={handleChange} className='border rounded-md p-2' />
+                    </div>
+                    <div className='flex flex-col gap-2'>
                         <label htmlFor="">Username</label>
                         <input type="text" id='username' onChange={handleChange} className='border rounded-md p-2' />
                     </div>

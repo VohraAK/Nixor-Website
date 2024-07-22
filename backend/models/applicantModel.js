@@ -17,7 +17,7 @@ const applicantSchema = new mongoose.Schema({
     educationSystem: {type: String, required: true},
     grades: {type: gradesSchema, required: true},
     user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-    applicationStatus: {type: String, default: 'pending'}, // takes values from 'pending', 'accepted' and 'rejected'
+    applicationStatus: {type: String, default: 'Pending'}, // takes values from 'pending', 'accepted' and 'rejected'
 
 }, {timestamps: true});
 

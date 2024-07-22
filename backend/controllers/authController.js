@@ -6,7 +6,7 @@ import jwt from 'jsonwebtoken';
 export const signup = async (request, response, next) => {
     try 
     {
-        const { username, email, password } = request.body;
+        const { fullName, username, email, password } = request.body;
 
         // check if user already exists in the database (username)
         const existingUser = await User.findOne({ username: username, email: email });
@@ -19,6 +19,7 @@ export const signup = async (request, response, next) => {
         // create new user
         const newUser = new User(
         {
+            fullName,
             username,
             email,
             password: hashedPassword

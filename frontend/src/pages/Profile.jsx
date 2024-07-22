@@ -96,7 +96,7 @@ export default function Profile() {
       <div className="flex flex-col items-center">
         <img src={LogoRed} className="h-20 w-20 object-contain" />
         <h1 className="font-semibold text-xl">
-          Hello {currentUser.firstName || currentUser.username}
+          Hello {currentUser.username}
         </h1>
       </div>
       <div className="w-full m-auto">
@@ -106,6 +106,16 @@ export default function Profile() {
           )}
           <form onSubmit={handleFormSubmit} className="flex flex-col gap-8">
             <p className="text-center my-5">ADD IMAGE HERE</p>
+            <div className="flex flex-col gap-2">
+              <label htmlFor="">Full Name</label>
+              <input
+                type="text"
+                id="fullName"
+                className="border rounded-md p-2"
+                onChange={handleChange}
+                defaultValue={currentUser.fullName}
+              />
+            </div>
             <div className="flex flex-col gap-2">
               <label htmlFor="">Username</label>
               <input
