@@ -15,6 +15,7 @@ import ApplicationStatus from "../components/ApplicationStatus.jsx";
 export default function Profile() {
   const { currentUser, error, loading } = useSelector((state) => state.user);
   const [formData, setFormData] = useState({});
+  const [signoutLoading, setSignoutLoading] = useState(false);
   const [userUpdateSuccess, setUserUpdateSuccess] = useState(false);
   const [applicationStatus, setApplicationStatus] = useState(null);
   const dispatch = useDispatch();
@@ -46,18 +47,22 @@ export default function Profile() {
 
   const handleSignOut = async () => {
     try {
+      setSignoutLoading(true);
       dispatch(signOutStart());
 
       const response = await fetch("/api/auth/signout");
       const data = await response.json();
 
       if (data.success === false) {
+        setSignoutLoading(false);
         dispatch(signOutFaliure(data.message));
         return;
       }
       dispatch(signOutSuccess());
+      setSignoutLoading(false);
       navigate("/sign-in");
     } catch (error) {
+      setSignoutLoading(false);
       dispatch(signOutFaliure(error.message));
     }
   };
@@ -95,7 +100,7 @@ export default function Profile() {
     <div className="p-12 flex flex-col gap-10 font-inter">
       <div className="flex flex-col items-center">
         <img src={LogoRed} className="h-20 w-20 object-contain" />
-        <h1 className="font-semibold text-xl">Hello {currentUser.username}</h1>
+        <h1 className="font-semibold text-2xl">Hello <span className="text-red-800">{currentUser.username}</span></h1>
       </div>
       <div className="w-full m-auto">
         <div className="bg-white p-12 rounded-lg border shadow-sm sm:max-w-[660px] mx-auto">
@@ -167,7 +172,8 @@ export default function Profile() {
           </form>
           <button
             onClick={handleSignOut}
-            className="text-red-700 mt-10 hover:underline"
+            className="text-red-700 mt-10 hover:underline disabled:opacity-80"
+            disabled={signoutLoading}
           >
             Sign out
           </button>
