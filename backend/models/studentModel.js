@@ -18,3 +18,7 @@ const studentSchema = new mongoose.Schema({
   subjectGrades: { type: subjectGradeSchema, required: true }, // each subject has a grade object, with midterm and final marks
   ECAs: {type: Array, default: []}, // Footballer, Basketballer, Volleyballer, President, Secretary, Treasurer, etc 
 });
+
+const Student = mongoose.model("Student", studentSchema);
+
+export default Student;
