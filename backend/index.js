@@ -5,6 +5,7 @@ import authRouter from "./routes/authRoute.js";
 import userRouter from "./routes/userRoute.js";
 import cookieParser from "cookie-parser";
 import applicantRouter from "./routes/applicantRoute.js";
+import studentRouter from "./routes/studentRoute.js";
 dotenv.config();
 
 const DEV_PORT = process.env.DEV_PORT;
@@ -28,6 +29,7 @@ connectDB();
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
 app.use("/api/applicant", applicantRouter);
+app.use('/api/student', studentRouter);
 
 // error-handling middleware
 app.use((error, request, response, next) => {
