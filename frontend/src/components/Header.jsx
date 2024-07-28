@@ -7,7 +7,7 @@ export default function Header() {
 
   return (
     <header className="w-full font-inter">
-      <div className="flex items-center bg-red-800 justify-between p-3.5 md:p-3 shadow-md text-slate-100 text-xs sm:text-lg">
+      <div className="flex items-center bg-red-800 justify-between p-3.5 md:p-3 shadow-md text-slate-100 text-lg">
         <Link to={"/"}>
           <div className="w-24 flex items-center">
             <img src={LogoWhite} className="object-contain select-none" />

@@ -28,7 +28,6 @@ export default function Profile() {
           `/api/applicant/checkstatus/${currentUser._id}`
         );
         const data = await response.json();
-        console.log(data);
         if (data.success === false) {
           setApplicationStatus(null);
           return;

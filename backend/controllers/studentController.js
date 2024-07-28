@@ -5,10 +5,7 @@ export const createstudent = async (request, response, next) => {
   try {
     if (request.user.id != request.params.id)
       return next(
-        errorHandler(
-          401,
-          "You can only enroll from your own account!"
-        )
+        errorHandler(401, "You can only enroll from your own account!")
       );
     // check if user already exists in the database (username)
     const existingStudent = await Student.findOne({
@@ -29,6 +26,20 @@ export const createstudent = async (request, response, next) => {
 
     await newStudent.save();
     response.status(200).json("Student created succesfully!");
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getstudent = async (request, response, next) => {
+  try {
+    if (request.user.id !== request.params.id)
+      return next(errorHandler(401, "You can only update your own account!"));
+    const existingStudent = await Student.findOne({
+      user: request.params.id,
+    });
+    if (!existingStudent) return next(errorHandler(404, "No student found!"));
+    response.status(200).json(existingStudent);
   } catch (error) {
     next(error);
   }
