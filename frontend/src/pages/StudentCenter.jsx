@@ -55,7 +55,7 @@ export default function StudentCenter() {
             <h1 className="text-2xl p-10 font-semibold text-center">
               Academic Journey
             </h1>
-            <div className="px-7 flex gap-5 flex-wrap">
+            <div className="px-7 flex gap-5 flex-wrap sm:justify-center">
               {student &&
                 student.subjectGrades.map((subject) => (
                   <SubjectOverview key={subject._id} subject={subject} />

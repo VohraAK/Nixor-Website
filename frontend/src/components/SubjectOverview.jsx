@@ -2,7 +2,7 @@
 export default function SubjectOverview({ subject }) {
   // props = name, midterm, final, grade
   return (
-    <div className="font-inter flex-col items-center border border-red-800 border-opacity-40 shadow-md rounded-xl p-3 bg-white sm:min-w-[380px] min-w-full">
+    <div className="font-inter flex-col items-center border border-red-800 border-opacity-40 shadow-md rounded-xl p-3 bg-white sm:min-w-[330px] min-w-full">
       <div className="flex justify-center border-b-2">
         <h1 className="text-2xl font-semibold text-nowrap py-2 mb-2">
           {subject.name}

@@ -6,6 +6,7 @@ import userRouter from "./routes/userRoute.js";
 import cookieParser from "cookie-parser";
 import applicantRouter from "./routes/applicantRoute.js";
 import studentRouter from "./routes/studentRoute.js";
+import adminRouter from "./routes/adminRoute.js";
 dotenv.config();
 
 const DEV_PORT = process.env.DEV_PORT;
@@ -30,6 +31,7 @@ app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
 app.use("/api/applicant", applicantRouter);
 app.use('/api/student', studentRouter);
+app.use("/api/admin", adminRouter);
 
 // error-handling middleware
 app.use((error, request, response, next) => {
