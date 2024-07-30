@@ -1,7 +1,7 @@
 import Student from "../models/studentModel.js";
 import { errorHandler } from "../utils/errorHandler.js";
 
-export const createstudent = async (request, response, next) => {
+export const createStudent = async (request, response, next) => {
   try {
     if (request.user.id != request.params.id)
       return next(
@@ -31,7 +31,7 @@ export const createstudent = async (request, response, next) => {
   }
 };
 
-export const getstudent = async (request, response, next) => {
+export const getStudent = async (request, response, next) => {
   try {
     if (request.user.id !== request.params.id)
       return next(errorHandler(401, "You can only update your own account!"));

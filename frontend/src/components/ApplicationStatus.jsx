@@ -18,12 +18,6 @@ export default function ApplicationStatus({ applicationStatus }) {
           )}
         </div>
       </div>
-      {applicationStatus === "Accepted" ? (
-        <button className="text-white bg-red-800 w-full font-semibold text-lg hover:opacity-80 shadow-md rounded-lg p-2 mx-auto">
-          Enroll in Nixor College
-        </button>
-      ) : null}
-      {/* Add student-conversion functionality on-click */}
     </div>
   );
 }

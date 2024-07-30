@@ -1,4 +1,4 @@
-import express, { json } from "express";
+import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import authRouter from "./routes/authRoute.js";
@@ -30,7 +30,7 @@ connectDB();
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
 app.use("/api/applicant", applicantRouter);
-app.use('/api/student', studentRouter);
+app.use("/api/student", studentRouter);
 app.use("/api/admin", adminRouter);
 
 // error-handling middleware
