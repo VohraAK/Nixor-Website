@@ -19,7 +19,7 @@ export default function Header() {
               <Link to={'/ecas'}><li className="hover:cursor-pointer hover:underline text-center">ECAs</li></Link>
               <Link to={'https://www.nixorcorporate.com'}><li className="hover:cursor-pointer hover:underline text-center">Nixor Corporate</li></Link>
             </ul> */}
-        <ul className="flex gap-5">
+        <ul className="flex gap-3">
           <li className="hover:cursor-pointer hover:underline text-center">
             {currentUser && currentUser.userType === "user" && (
               <Link to={"/apply-online"}>Apply Now</Link>
@@ -28,6 +28,11 @@ export default function Header() {
           <li className="hover:cursor-pointer hover:underline text-center">
             {currentUser && currentUser.userType === "student" && (
               <Link to={"/student-center"}>Student Center</Link>
+            )}
+          </li>
+          <li className="hover:cursor-pointer hover:underline text-center">
+            {currentUser && currentUser.userType === "admin" && (
+              <Link to={"/admin-portal"}>Admin Portal</Link>
             )}
           </li>
           <li className="hover:cursor-pointer hover:underline text-center">
