@@ -3,6 +3,7 @@ import Student from "../models/studentModel.js";
 import User from "../models/userModel.js";
 // import { createStudent } from "./studentController.js";
 import Applicant from "../models/applicantModel.js";
+import { query } from "express";
 
 export const enrollStudent = async (request, response, next) => {
   try {
@@ -27,8 +28,8 @@ export const enrollStudent = async (request, response, next) => {
 
     if (!updatedUser) return next(errorHandler(404, "No user found!"));
 
-    const updatedApplicant = await Applicant.findByIdAndUpdate(
-      request.params.id,
+    const updatedApplicant = await Applicant.findOneAndUpdate(
+      { user: request.params.id },
       {
         $set: {
           applicationStatus: "Accepted",
@@ -87,12 +88,48 @@ export const deleteStudent = async (request, response, next) => {
   }
 };
 
+// search by full name or userType === applicant
+export const getStudents = async (request, response, next) => {
+  try {
+    const startIndex = parseInt(request.query.startIndex) || 0;
+    const limit = parseInt(request.query.limit) || 4;
+    const searchName = request.query.searchName || "";
+    const sort = request.query.sort || "createdAt";
+    const order = request.query.order || "desc";
+
+    const result = await Student.find({
+      fullName: { $regex: searchName, $options: "i" },
+    })
+      .sort({ [sort]: order })
+      .limit(limit)
+      .skip(startIndex);
+
+    return response.status(200).json(result);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getApplicants = async (request, response, next) => {
+  try {
+    const startIndex = parseInt(request.query.startIndex) || 0;
+    const limit = parseInt(request.query.limit) || 4;
+
+    const result = await Applicant.find({ applicationStatus: "Pending" })
+      .limit(limit)
+      .skip(startIndex)
+      .sort({ createdAt: "desc" });
+
+    return response.status(200).json(result);
+  } catch (error) {
+    next(error);
+  }
+};
+
 /* 
 TODO endpoints:
 - student enrollment (email student upon enrollment) ✅
 - student details updating ✅
 - student deleting ✅
-- grade changing
-- ECAs changing
 - student searching
 */
